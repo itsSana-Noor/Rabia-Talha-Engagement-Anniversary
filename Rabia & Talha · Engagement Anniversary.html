@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rabia &amp; Talha · Engagement Anniversary</title>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--night:#17082b;--plum:#2d0f4a;--rose:#ff7eb0;--gold:#f6cd7a;--blush:#ffe3ee;--mute:#c9b3dd;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(1200px 700px at 80% -10%,#6b1d6b55,transparent 60%),radial-gradient(900px 600px at 0% 100%,#ff7eb022,transparent 60%),linear-gradient(180deg,var(--night),var(--plum));color:var(--blush);font-family:'Cormorant Garamond',Georgia,serif;font-size:1.25rem;line-height:1.6;min-height:100vh;overflow-x:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+section{position:relative;z-index:2;padding:5rem 1.5rem;max-width:760px;margin:0 auto;text-align:center}
+.script{font-family:'Pinyon Script','Brush Script MT',cursive;font-weight:400}
+/* envelope gate */
+#gate{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:var(--night);transition:opacity 1.2s ease,visibility 1.2s;cursor:pointer;text-align:center;padding:1.5rem}
+#gate.open{opacity:0;visibility:hidden}
+#gate .seal{width:96px;height:96px;margin:0 auto 1.5rem;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffb3d0,#c2185b 70%);display:grid;place-items:center;box-shadow:0 0 0 6px #ffffff10,0 0 60px #ff7eb088;animation:beat 1.6s ease-in-out infinite}
+#gate .seal svg{width:44px;height:44px}
+#gate h2{font-size:2.6rem;color:var(--gold)}
+#gate p{color:var(--mute);font-style:italic}
+@keyframes beat{50%{transform:scale(1.08)}}
+/* hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.hero .kicker{color:var(--gold);letter-spacing:.08em;font-style:italic}
+.names{font-size:clamp(3.6rem,15vw,8rem);line-height:1.05;margin:.4rem 0;background:linear-gradient(100deg,var(--blush),var(--rose) 45%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 24px #ff7eb055)}
+.amp{display:block;font-size:.55em;color:var(--gold);-webkit-text-fill-color:var(--gold)}
+.ring{width:110px;margin:1rem auto;animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px) rotate(4deg)}}
+.date{display:inline-block;margin-top:.5rem;padding:.5rem 1.6rem;border:1px solid var(--gold);border-radius:999px;color:var(--gold);font-size:1.4rem;font-weight:600}
+.hint{margin-top:2.5rem;color:var(--mute);font-style:italic;font-size:1rem}
+/* countdown */
+h3{font-size:3rem;color:var(--gold);margin-bottom:1.5rem}
+.count{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.count div{min-width:5.2rem;padding:1rem .6rem;border-radius:22px;background:#ffffff0d;border:1px solid #ffffff22;backdrop-filter:blur(6px)}
+.count b{display:block;font-size:2.6rem;font-weight:600;color:var(--blush)}
+.count span{font-size:.95rem;color:var(--mute)}
+#cdnote{margin-top:1.2rem;color:var(--mute);font-style:italic}
+/* letter */
+.letter{background:linear-gradient(160deg,#ffffff14,#ffffff06);border:1px solid #ffffff22;border-radius:32px 32px 90px 32px;padding:2.5rem 1.8rem;text-align:left;box-shadow:0 30px 80px #00000066}
+.letter p+p{margin-top:1rem}
+.letter .sig{margin-top:1.5rem;text-align:right;font-size:2rem;color:var(--rose)}
+/* tap-to-open envelope */
+.envwrap{perspective:900px;display:flex;flex-direction:column;align-items:center}
+.env{position:relative;width:min(88vw,380px);height:240px;border:0;background:none;cursor:pointer;font:inherit;color:inherit;padding:0}
+.env:focus-visible{outline:3px solid var(--gold);outline-offset:8px;border-radius:12px}
+.env .back{position:absolute;inset:0;border-radius:14px;background:linear-gradient(160deg,#ffb3d0,#d8588f);box-shadow:0 25px 60px #00000077}
+.env .front{position:absolute;inset:0;border-radius:14px;background:linear-gradient(135deg,#ffc7dc 0 50%,transparent 50%),linear-gradient(225deg,#f7a6c6 0 50%,transparent 50%),linear-gradient(0deg,#ec7aa8 0 55%,transparent 55%);clip-path:polygon(0 0,50% 52%,100% 0,100% 100%,0 100%)}
+.env .flap{position:absolute;left:0;right:0;top:0;height:55%;background:linear-gradient(180deg,#ff9fc4,#f27aa8);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .9s ease;z-index:3}
+.env.open .flap{transform:rotateX(180deg);z-index:0}
+.env .wax{position:absolute;left:50%;top:44%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe9a8,#d9a441 70%);display:grid;place-items:center;z-index:4;font-size:1.5rem;box-shadow:0 4px 14px #0006;transition:opacity .4s}
+.env.open .wax{opacity:0}
+.tapnote{margin-top:1.2rem;color:var(--mute);font-style:italic;font-size:1.05rem}
+.paper{width:min(92vw,520px);max-height:0;overflow:hidden;opacity:0;transform:translateY(-30px);transition:max-height 1.2s ease,opacity .9s ease .3s,transform 1s ease .3s;margin-top:0}
+.paper.show{max-height:900px;opacity:1;transform:none;margin-top:1.5rem}
+.paper .sheet{background:linear-gradient(180deg,#fff7fb,#ffe3ee);color:#3b1550;border-radius:10px;padding:2rem 1.6rem;text-align:left;box-shadow:0 20px 60px #0007;border-top:6px solid var(--gold)}
+.paper .sheet p+p{margin-top:.9rem}
+.paper .sheet .to{font-size:2.2rem;color:#c2185b;line-height:1.1}
+.paper .sheet .sig{text-align:right;font-size:2rem;color:#c2185b;margin-top:1.2rem}
+/* wishes */
+.wishes{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:1rem}
+.wish{padding:1.6rem 1.2rem;border-radius:26px;background:#ffffff0a;border:1px solid #ffffff1f;cursor:pointer;font:inherit;color:inherit;transition:transform .35s,background .35s}
+.wish:hover,.wish:focus-visible{transform:translateY(-6px);background:#ff7eb022;outline:2px solid var(--gold);outline-offset:3px}
+.wish .em{font-size:2.2rem;display:block}
+.wish .t{display:block;margin-top:.4rem;color:var(--gold);font-weight:600}
+.wish .m{display:block;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s,opacity .5s,margin .5s;font-size:1.05rem;color:var(--blush)}
+.wish.on .m{max-height:140px;opacity:1;margin-top:.6rem}
+/* surprise button */
+.btn{margin-top:1rem;padding:1rem 2.4rem;border:0;border-radius:999px;font:600 1.3rem 'Cormorant Garamond',serif;color:#2a0a3d;background:linear-gradient(100deg,var(--gold),var(--rose));cursor:pointer;box-shadow:0 10px 40px #ff7eb066;transition:transform .2s}
+.btn:hover{transform:scale(1.05)}
+.btn:focus-visible{outline:3px solid var(--blush);outline-offset:3px}
+#final{margin-top:1.5rem;min-height:3rem;font-size:2rem;color:var(--gold)}
+footer{position:relative;z-index:2;text-align:center;padding:3rem 1rem 4rem;color:var(--mute);font-style:italic}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<div id="gate" role="button" tabindex="0" aria-label="Open your surprise">
+  <div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 21s-7.5-4.6-9.6-9.4C.9 8 3 4.5 6.5 4.5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3C21 4.5 23.100 8 21.600 11.600 19.500 16.400 12 21 12 21z"/></svg></div>
+    <h2 class="script">A surprise for Rabia &amp; Talha</h2>
+    <p>Tap to open</p>
+  </div>
+</div>
+
+<section class="hero">
+  <p class="kicker">Happy Engagement Anniversary</p>
+  <h1 class="names script">Rabia <span class="amp">&amp;</span> Talha</h1>
+  <svg class="ring" viewBox="0 0 100 100" fill="none" stroke="#f6cd7a" stroke-width="3" aria-hidden="true">
+    <circle cx="50" cy="64" r="26"/><circle cx="50" cy="64" r="20" stroke-opacity=".4"/>
+    <path d="M40 30l10-14 10 14-10 12z" fill="#ffe3ee" stroke="#ff7eb0"/>
+    <path d="M40 30h20" stroke="#ff7eb0"/>
+  </svg>
+  <div class="date">31 October</div>
+  <p class="hint">Scroll down, there is more for you ↓</p>
+</section>
+
+<section>
+  <h3 class="script">Counting down to your day</h3>
+  <div class="count" id="count" aria-live="polite">
+    <div><b id="d">0</b><span>days</span></div>
+    <div><b id="h">0</b><span>hours</span></div>
+    <div><b id="m">0</b><span>minutes</span></div>
+    <div><b id="s">0</b><span>seconds</span></div>
+  </div>
+  <p id="cdnote"></p>
+</section>
+
+<section>
+  <div class="letter">
+    <p>Dear Rabia and Talha,</p>
+    <p>On 31 October, two hearts said yes to a lifetime together. Since that day your smiles have been a little brighter, your laughter a little louder, and our whole family has felt the joy of watching your story begin.</p>
+    <p>May every year add more love, more patience, more laughter and more duas for the two of you. May Allah keep your bond strong and your home full of barakah.</p>
+    <p class="sig script">With all our love</p>
+  </div>
+</section>
+
+<section>
+  <h3 class="script">A letter, just for you</h3>
+  <div class="envwrap">
+    <button class="env" id="env" aria-expanded="false" aria-controls="paper" aria-label="Tap to open the letter">
+      <span class="back"></span><span class="front"></span><span class="flap"></span><span class="wax">❤</span>
+    </button>
+    <p class="tapnote" id="tapnote">Tap the envelope to open it</p>
+    <div class="paper" id="paper">
+      <div class="sheet">
+        <p class="to script">My dearest Rabia &amp; Talha,</p>
+        <p>Happy engagement anniversary! Every 31 October reminds us of the day your journey as a pair officially began, and what a beautiful journey it is.</p>
+        <p>Rabia, may you always feel as loved and cherished as you are today. Talha, thank you for being the reason she smiles so brightly.</p>
+        <p>Hold each other’s hand through every season. Laugh often, forgive quickly and keep choosing one another, every single day. We are so proud of you both and we pray for your happiness, always.</p>
+        <p class="sig script">Forever yours, with love ❤</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h3 class="script">Our wishes for you</h3>
+  <div class="wishes">
+    <button class="wish"><span class="em">💍</span><span class="t">Forever</span><span class="m">May the promise you made on 31 October grow stronger every single day.</span></button>
+    <button class="wish"><span class="em">🌹</span><span class="t">Love</span><span class="m">May you always find new reasons to smile at each other, even on ordinary days.</span></button>
+    <button class="wish"><span class="em">🤲</span><span class="t">Blessings</span><span class="m">May Allah bless your journey, shower you with happiness and write only good for you both.</span></button>
+  </div>
+</section>
+
+<section>
+  <h3 class="script">One last thing…</h3>
+  <button class="btn" id="boom">Tap for your surprise</button>
+  <p id="final" class="script" role="status"></p>
+</section>
+
+<footer>Made with love, for Rabia &amp; Talha · 31 October</footer>
+
+<script>
+(function(){
+  var gate=document.getElementById('gate');
+  var cv=document.getElementById('fx'),cx=cv.getContext('2d'),W,H,P=[],glyphs=['❤','✿','❀','✦','♡'],cols=['#ff7eb0','#ffe3ee','#f6cd7a','#ffb3d0'];
+  function size(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+  size();addEventListener('resize',size);
+  function mk(x,y,burst){
+    var a=Math.random()*Math.PI*2,v=burst?2+Math.random()*7:0;
+    return{x:x,y:y,vx:burst?Math.cos(a)*v:(Math.random()-.5)*.6,vy:burst?Math.sin(a)*v-3:.6+Math.random()*1.2,s:10+Math.random()*16,g:glyphs[Math.random()*glyphs.length|0],c:cols[Math.random()*cols.length|0],r:Math.random()*6,vr:(Math.random()-.5)*.04,life:burst?140:1e9,a:.35+Math.random()*.5,b:burst}
+  }
+  for(var i=0;i<28;i++)P.push(mk(Math.random()*innerWidth,Math.random()*innerHeight,false));
+  function tick(){
+    cx.clearRect(0,0,W,H);
+    for(var i=P.length-1;i>=0;i--){
+      var p=P[i];p.x+=p.vx+Math.sin(p.y/60)*.3;p.y+=p.vy;p.r+=p.vr;
+      if(p.b){p.vy+=.12;p.life--;if(p.life<=0||p.y>H+30){P.splice(i,1);continue}}
+      else if(p.y>H+30){p.y=-30;p.x=Math.random()*W}
+      cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.globalAlpha=p.b?Math.min(1,p.life/50):p.a;cx.fillStyle=p.c;cx.font=p.s+'px serif';cx.fillText(p.g,0,0);cx.restore();
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+  function burst(){for(var i=0;i<90;i++)P.push(mk(W/2,H/2,true))}
+  function open(){if(gate.classList.contains('open'))return;gate.classList.add('open');burst()}
+  gate.addEventListener('click',open);
+  gate.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+
+  /* countdown to 31 October */
+  var now=new Date(),yr=now.getFullYear(),target=new Date(yr,9,31,0,0,0);
+  var endDay=new Date(yr,10,1,0,0,0);
+  if(now>=endDay){target=new Date(yr+1,9,31,0,0,0)}
+  function pad(n){return n<10?'0'+n:''+n}
+  function upd(){
+    var n=new Date(),diff=target-n,note=document.getElementById('cdnote');
+    if(n>=target&&n<new Date(target.getFullYear(),10,1)){
+      ['d','h','m','s'].forEach(function(k){document.getElementById(k).textContent='0'});
+      note.textContent='Today is your day. Happy Engagement Anniversary! 🎉';return;
+    }
+    if(diff<0)diff=0;
+    var d=Math.floor(diff/864e5),h=Math.floor(diff%864e5/36e5),m=Math.floor(diff%36e5/6e4),s=Math.floor(diff%6e4/1e3);
+    document.getElementById('d').textContent=d;
+    document.getElementById('h').textContent=pad(h);
+    document.getElementById('m').textContent=pad(m);
+    document.getElementById('s').textContent=pad(s);
+    note.textContent='Until 31 October, your engagement anniversary';
+  }
+  upd();setInterval(upd,1000);
+
+  var env=document.getElementById('env'),paper=document.getElementById('paper'),tn=document.getElementById('tapnote');
+  env.addEventListener('click',function(){
+    var o=!env.classList.contains('open');
+    env.classList.toggle('open',o);paper.classList.toggle('show',o);
+    env.setAttribute('aria-expanded',o);
+    tn.textContent=o?'Tap the envelope again to close it':'Tap the envelope to open it';
+    if(o)burst();
+  });
+  document.querySelectorAll('.wish').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('on')})});
+  document.getElementById('boom').addEventListener('click',function(){
+    burst();setTimeout(burst,350);
+    document.getElementById('final').textContent='Rabia ❤ Talha, forever and always';
+  });
+})();
+</script>
+</body>
+</html>
